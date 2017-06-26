@@ -52,7 +52,7 @@ text-align:center;
     width: 25vw;
  vertical-align:top;
     height:6vh;
- margin-left:125px;
+ margin-left:8vw;
     padding: 0px 25px;
     font: bold 3.6vh 'Arial Black', 'Arial Bold', Gadget, sans-serif;
     border: 0;
@@ -64,7 +64,7 @@ text-align:center;
     overflow: hidden;
 }
 #instruction{
-margin-left:125px;
+margin-left:8vw;
 }
  .play-btn {
  cursor:pointer;
@@ -91,23 +91,49 @@ position:absolute;
 background-image:url('http://i.imgur.com/4jsHMtj.gif');
 background-size: 50vw 65.5vh;
 z-index:999999;
+display:none;
 }
+#fs{display:block;float:right;cursor:pointer;position:absolute; margin-top:-18vh;text-align:right;width:100%}
    </style>
   <div id="splash">&nbsp;</div>
      <div id="overlay">
+<div id="fs">⇳ Full Screen</div>
    <div class="form">
    <input maxlength="20" type="text" id="nick"><input class="play-btn" value="Play" type="button"><br>
    <div id="instruction">Move your mouse to control your player and left click to shot !!!</div>
    <center><hr style="width:75%"></hr></center>
-   <div id='slot'>&nbsp;</div>
-   <div id="links"><a href="http://iogames.space" target="blank">More IO Games</a></div>
+   <div id='slot'><script type="text/javascript" src="https://www.gtburst.com/show/9991"></script><script type="text/javascript" src="https://www.gtburst.com/show/9992"></script></div>
+   <div id="links">
+<a href="http://iogames.space" target="blank">More IO Games</a> | 
+<a href="https://www.crazygames.com/t/io" target="blank">CrazyGames</a> | 
+<a href="https://www.miniclip.com" target="blank">Miniclip</a> | 
+<a href="http://www.y8.com/" target="blank">Y8.com</a>
+
+</div>
    </div>
    </div>
 <script>
+document.getElementById('fs').addEventListener('click', function() {
+if (top.location != location) {top.location.href='http://www.kombo.io';return false;}
+    SetFullscreen(1);
+    document.getElementById('canvas').style.zIndex = 0;
+    var d = 'block';
+    if (document.getElementById('overlay').style.display == 'block') {
+        document.getElementById('overlay').style.display = 'none';
+        d = 'block'
+    } else {
+        document.getElementById('overlay').style.display = 'block';
+        d = 'none';
+    }
+    setTimeout(function() {
+        SendMessage("Main Camera", "loadOverlay", d);
+    }, 50);
+}, true);
 if (typeof window.orientation === 'undefined') {
 document.getElementById('splash').style.backgroundImage='url("http://i.imgur.com/4jsHMtj.gif")';
 }else{document.getElementById('splash').style.backgroundImage='url("http://i.imgur.com/ZjT5XAn.gif")';}
 document.getElementById('splash').style.left=(window.innerWidth/4)+'px';
+document.getElementById('splash').style.display='block';
 if(typeof Storage !== "undefined")
 {
 document.getElementById('nick').value=localStorage.getItem("nick");
